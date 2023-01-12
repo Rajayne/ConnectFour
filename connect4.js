@@ -13,12 +13,6 @@ const restartButton = document.querySelector('#restart');
 
 let gameOver = false;
 let currPlayer = 1; // active player: 1 or 2;
-
-// const player1 = document.querySelector('#p1Name');
-// const player1Color = document.querySelector('#p1Color');
-// const player2 = document.querySelector('#p2Name');
-// const player2Color = document.querySelector('#p2Color');
-
 let board = []; // array of rows, each row is array of cells  (board[h][w])
 
 /** makeBoard: create in-JS board structure:
