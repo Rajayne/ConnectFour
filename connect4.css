@@ -14,15 +14,19 @@ h1 {
 }
 
 p {
+  font-size: 1em;
   color: white;
 }
 
+#game {
+  border: solid 1px slategray;
+}
 /* .sidebar to contain player customizations */
 
 .ribbon {
   display: flex;
   justify-content: space-between;
-  padding: 15px 25px;
+  padding: 12px 25px;
   background-color: rgba(255,255,255,0.1);
   height: 2em;
 }
@@ -37,7 +41,6 @@ p {
 
 /* pieces are div within game table cells: draw as colored circles */
 .piece {
-  /* TODO: make into circles */
   margin: 5px;
   width: 80%;
   height: 80%;
@@ -45,11 +48,11 @@ p {
 }
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
-#p1 {
+.p1 {
   background: red;
 }
 
-#p2 {
+.p2 {
   background: blue;
 }
 
