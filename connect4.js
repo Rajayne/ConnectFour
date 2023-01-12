@@ -13,6 +13,12 @@ const restartButton = document.querySelector('#restart');
 
 let gameOver = false;
 let currPlayer = 1; // active player: 1 or 2;
+
+// const player1 = document.querySelector('#p1Name');
+// const player1Color = document.querySelector('#p1Color');
+// const player2 = document.querySelector('#p2Name');
+// const player2Color = document.querySelector('#p2Color');
+
 let board = []; // array of rows, each row is array of cells  (board[h][w])
 
 /** makeBoard: create in-JS board structure:
@@ -83,7 +89,6 @@ function findSpotForCol(w) {
 };
 
 /** placeInTable: update DOM to place piece into HTML table of board */
-
 function placeInTable(h, w) {
   // TODO: make a div and insert into correct table cell
   const piece = document.createElement('div');
@@ -93,19 +98,21 @@ function placeInTable(h, w) {
 };
 
 /** endGame: announce game end */
-
 function endGame(msg) {
-  alert(msg);
+  setTimeout(() => {
+    alert(msg)
+  }, 300);
 };
 
+// Restart by reloading game page
 const restartGame = () => {
-  gameOver = false;
   location.reload();
 };
 
+// Eventlistener to restart game if button is clicked and question confirmed
 restartButton.addEventListener('click', () => {
   if(confirm('Do you want to restart the game?')) {
-    location.reload();
+    restartGame();
   } else {
     return;
   };
@@ -136,21 +143,32 @@ function updateGame(w) {
   // check for win
   if (checkForWin()) {
     gameOver = true;
-    return endGame(`Player ${currPlayer} won!`);
+    if (currPlayer === 1) {
+      return endGame(`Red won!`);
+    } else {
+      return endGame(`Blue won!`);
+    };
   };
 
   // Check for tie
   // Check if all cells in board are filled; if so call, call endGame
-  const checkForTie = (arr) => {
+  const checkForTie = (arr) =>
     arr.every((row) => row.every((cell) => cell !== null));
+
+
+  // If tied, alert Game Tied
+  if (checkForTie(board)) {
+    gameOver = true;
+    return endGame('Game Tied!');
   };
 
-  if (checkForTie(board)) {
-    return endGame('Tie!');
-  }
-
-  // switch players, add element.textContent to change status between players
+  // Switch players, add element.textContent to change turn status between players
   currPlayer = currPlayer === 1 ? 2 : 1;
+  if (currPlayer === 1) {
+    document.querySelector('#status').textContent = `Red's Turn`;
+  } else {
+    document.querySelector('#status').textContent = `Blue's Turn`;
+  };
 };
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */

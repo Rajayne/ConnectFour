@@ -9,12 +9,36 @@ body {
 h1 {
   display: block;
   color: white;
-  margin: 1em 0 .5em 0;
+  margin: 1em 0 0 0;
   text-align: center;
 }
 
 p {
+  opacity: 0.5;
   font-size: 1em;
+}
+
+/* .customRibbon {
+  color: white;
+  font-size: 1em;
+  display: flex;
+  padding: 12px 25px;
+  height: 2em;
+  margin: 0 0 .5em 0;
+}
+
+input[type="text"] {
+  width: 6em;
+  height: 1em;
+}
+
+input[type="color"] {
+  width: 2.5em;
+  height: 1.5em;
+} */
+
+#status {
+  font-size: 1.5em;
   color: white;
 }
 
