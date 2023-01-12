@@ -60,21 +60,26 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 // Loop over each row and each cell, reverse iteration to start from bottom
 function findSpotForCol(w) {
-  // TODO: write the real version of this, rather than always returning 0
-  return 0;
-}
+    for (let h = boardHeight; h > 0; h--) {
+      if (board[h][w] !== null) {
+      return h;
+    };
+  };
+};
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(h, w) {
   // TODO: make a div and insert into correct table cell
-  const gamePiece = document.createElement("div");
-  gamePiece.setAttribute("class", "piece");
+  const piece = document.createElement("div");
+  piece.classList.add("piece");
     if (currPlayer = 1) {
-      gamePiece.setAttribute("id", "p1");
+      piece.setAttribute("id", "p1");
     } else {
-      gamePiece.setAttribute("id", "p2");
+      piece.setAttribute("id", "p2");
     };
+  const cell = document.getElementById(`#${h}-${w}`);
+  cell.append(piece);
 };
 
 /** endGame: announce game end */
@@ -123,14 +128,14 @@ function checkForWin() {
       ([h, w]) =>
         h >= 0 &&
         h < boardHeight &&
-        h >= 0 &&
-        h < boardWidth &&
+        w >= 0 &&
+        w < boardWidth &&
         board[h][w] === currPlayer
     );
   };
 
-  // TODO: read and understand this code. Add comments to help you.
-
+  // Checks for 4 matching pieces in a row horizontally, vertically, diagonally right, or diagonally left
+  // If 4 in a row, return true to win
   for (let h = 0; h < boardHeight; h++) {
     for (let w = 0; w < boardWidth; w++) {
       const horiz = [[h, w], [h, w + 1], [h, w + 2], [h, w + 3]];
