@@ -149,7 +149,6 @@ function updateGame(w) {
   const checkForTie = (arr) =>
     arr.every((row) => row.every((cell) => cell !== null));
 
-
   // If tied, alert Game Tied
   if (checkForTie(board)) {
     gameOver = true;
