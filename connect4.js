@@ -76,18 +76,18 @@ function makeHtmlBoard() {
 function findSpotForCol(w) {
     for (let h = boardHeight - 1; h >= 0; h -= 1) {
       if (board[h][w] === null) {
-        board[h][w] = currPlayer;
       return h;
     }
   }
 };
 
 /** placeInTable: update DOM to place piece into HTML table of board */
+// classList ${board[h][w]} === currPlayer (1,2) but more dynamic not using from global variable
 function placeInTable(h, w) {
   // TODO: make a div and insert into correct table cell
   const piece = document.createElement('div');
   const cell = document.getElementById(`${h}-${w}`);
-  piece.classList.add('piece',`p${currPlayer}`);
+  piece.classList.add('piece',`p${board[h][w]}`);
   cell.append(piece);
 };
 
@@ -115,9 +115,10 @@ restartButton.addEventListener('click', () => {
 /** handleClick: handle click of column top to play piece */
   // get w from ID of clicked cell
   // if game has already ended or was won, will reset board by refreshing page
+  // Number converts to integer (+evt.target.id is same) converts to integer
 function handleClick(evt) {
   if (gameOver === false) {
-    let w = +evt.target.id;
+    let w = Number(evt.target.id);
     updateGame(w);
   } else {
     restartGame();
@@ -164,9 +165,12 @@ function updateGame(w) {
     return null;
   };
 
+  board[h][w] = currPlayer;
+
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
   placeInTable(h, w);
+
   // check for win
   if (checkForWin()) {
     gameOver = true;
